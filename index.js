@@ -8,9 +8,9 @@ const firebaseConfig = {
     projectId: "fastpark-d6132",
     storageBucket: "fastpark-d6132.appspot.com",
     messagingSenderId: "606857217433",
-    appId: "1:606857217433:web:00a686c5780573bc437f08",
-    measurementId: "G-1SJKNSD0Y0"
-};
+    appId: "1:606857217433:web:2252a11ba3a87bcf437f08",
+    measurementId: "G-C3WYXPDJE8"
+  };
 
 firebase.initializeApp(firebaseConfig);
 
@@ -23,8 +23,43 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send({ mgs: 'Olá Node' })
+app.get('/login', async (req, res) => {
+    
+})
+
+app.post('/registry', async (req, res) => {
+    const data = req.body;
+    await Usuario.add(data)
+    res.status(201).send({ mgs: 'Usuário cadastrado com sucesso' })
+})
+
+app.get('/listUsers', async (req, res) => {
+    const snapshot = await Usuario.get();
+    const usuarios = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+    res.status(200).send(usuarios)  
+})
+
+app.get('/searchById/:id', async (req, res) => {
+    const id = req.params.id
+    const snapshot = await Usuario.get();
+    const usuarios = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+    const usuario = usuarios.filter((user) => user.id == id)
+
+    res.status(200).send(usuario)
+})
+
+app.put('/updateById/:id', async (req, res) => {
+    const id = req.params.id
+    await Usuario.doc(id).update(req.body)
+
+    res.status(200).send({msg: 'Usuario atualizado co sucesso'})
+})
+
+app.delete('/deleteById/:id', async(req, res) => {
+    const id = req.params.id
+    await Usuario.doc(id).delete()
+
+    res.status(200).send({msg: 'Usuario deletado com sucesso'})
 })
 
 app.listen(3000, () => {
