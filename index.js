@@ -15,7 +15,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
-
 const Usuario = db.collection('Usuarios');
 
 const app = express();
@@ -23,8 +22,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/login', async (req, res) => {
-    
+app.post('/cadastro', async (req, res) => {
+    const data = req.body;
+    await firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
+    .then((userCredential) => {
+        res.status(201).send({msg: 'Usuario cadastrado com sucesso', user: userCredential})
+    })
+    .catch((error) => {
+        res.status(500).send({msg: 'Algo deu errado', error: error})
+    })
 })
 
 app.post('/registry', async (req, res) => {
