@@ -33,6 +33,17 @@ app.post('/cadastro', async (req, res) => {
     })
 })
 
+app.get('/entrar', async (req, res) => {
+    const data = req.body;
+    await firebase.auth().signInWithEmailAndPassword(data.email, data.password)
+    .then((userCredential) => {
+        res.status(200).send({msg: 'Usuário logado', user: userCredential})
+    })
+    .catch((error) => {
+        res.status(500).send({msg: 'Algo deu errado', error: error})
+    })
+})
+
 app.post('/registry', async (req, res) => {
     const data = req.body;
     await Usuario.add(data)
