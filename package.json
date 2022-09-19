@@ -6,7 +6,7 @@
   "author": "EduBarrros <eduardodeoliveirabarros@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
