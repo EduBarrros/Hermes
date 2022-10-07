@@ -2,6 +2,32 @@
 
 Repositório para criação do backend do projeto de conclusão de curso FastPark
 
+=============================//==============================
+
+# Enpoints
+
+# Auth
+
+## Post
+
+### Login: http://localhost:6060/auth/entrar
+
+### Register: http://localhost:6060/auth/cadastrar
+
+# Parking
+
+## Post
+
+### CheckIn: http://localhost:6060/parking/checkIn
+
+### CheckOut: http://localhost:6060/parking/checkOut/:id
+
+## Get
+
+### CheckIn List: http://localhost:6060/parking/listarCheckIn
+
+=============================//==============================
+
 ## Como executar?
 
 1. Clone o repositório na sua maquina.
