@@ -1,5 +1,4 @@
 const firebase = require('../config/firebase')
-const { v1: uuidv1 } = require('uuid')
 
 const db = firebase.firestore()
 const parking = db.collection('cl_parking')
@@ -8,8 +7,7 @@ exports.checkIn = async (req, res) => {
     const data = req.body
 
     const checkinData = {
-        id: uuidv1(),
-        idFuncionario: data?.idFuncionario,
+        emailFuncionario: data?.emailFuncionario,
         hrEntrada: new Date(),
         hrSaida: null,
         placa: data?.placa,
@@ -19,7 +17,7 @@ exports.checkIn = async (req, res) => {
     }
 
     if (
-        checkinData.idFuncionario === undefined ||
+        checkinData.emailFuncionario === undefined ||
         checkinData.placa === undefined ||
         checkinData.cor === undefined ||
         checkinData.modelo === undefined
@@ -38,7 +36,11 @@ exports.checkIn = async (req, res) => {
 exports.listarCheckIn = async (req, res) => {
     const snapshot = await parking.get()
     const listParking = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-    res.status(201).send(listParking)
+    const formatedDate = listParking.map((doc) => ({ ...doc, hrEntrada: new Date(doc.hrEntrada.seconds * 1000).toLocaleString('pt-BR', {
+        timeZone: 'America/Sao_Paulo'
+      })
+      }))
+    res.status(201).send(formatedDate)
 }
 
 exports.checkOut = async (req, res) => {
