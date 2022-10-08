@@ -41,9 +41,19 @@ exports.listarCheckIn = async (req, res) => {
         const snapshot = await parking.where('hrSaida', '==', null).get()
         const listParking = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
         const formatedDate = listParking.map((doc) => ({
-            ...doc, hrEntrada: new Date(doc.hrEntrada.seconds * 1000).toLocaleString('pt-BR', {
+            id: doc.id,
+            hrEntrada: new Date(doc.hrEntrada.seconds * 1000).toLocaleString('pt-BR', {
                 timeZone: 'America/Sao_Paulo'
-            })
+            }),
+            hrSaida: doc.hrSaida,
+            isParking: doc.isParking,
+            emailFuncionario: doc.emailFuncionario,
+            valorFinal: doc.valorFinal,
+            car: {
+                placa: doc.placa,
+                modelo: doc.modelo,
+                cor: doc.cor
+            }
         }))
         res.status(201).send({ status: 1, data: formatedDate })
     } catch (error) {
