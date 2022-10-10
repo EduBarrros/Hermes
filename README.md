@@ -25,6 +25,7 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
 ## Get
 
 ### CheckIn List: http://localhost:6060/parking/listarCheckIn
+### CheckOut List: http://localhost:6060/parking/listarCheckOut
 
 =============================//==============================
 
