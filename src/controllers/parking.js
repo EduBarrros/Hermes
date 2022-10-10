@@ -144,6 +144,7 @@ exports.checkOut = async (req, res) => {
                 break;
 
             default:
+                await parking.doc(id).update({ "hrSaida": new Date(), "valorFinal": 150, "isParking": false})
                 break;
         }
 
