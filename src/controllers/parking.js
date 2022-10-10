@@ -147,7 +147,7 @@ exports.checkOut = async (req, res) => {
                 break;
         }
 
-        res.status(201).send({ status: 1, msg: 'Registro atualizado com sucesso.' })
+        res.status(201).send({ status: 1, msg: 'CheckOut realizado com sucesso.' })
     } catch (error) {
         res.status(500).send({ status: 0, msg: 'Algo deu errado.', error: error })
     }
@@ -174,7 +174,7 @@ exports.listarCheckOut = async (req, res) => {
                 cor: doc.cor
             }
         }))
-        res.status(201).send(formatedDate)
+        res.status(201).send({status: 1, data: formatedDate})
     } catch (error) {
         res.status(500).send({ status: 0, msg: 'Algo deu errado.', error: error })
     }
