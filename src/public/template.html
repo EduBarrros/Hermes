@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Relatório de fluxo de veiculos</title>
+  </head>
+  <body>
+    <h1>Listagem de atendimentos completos:</h1>
+    <ul>
+      {{#each parkings}}
+      <li>Carro: {{this.car.modelo}}</li>
+      <li>Placa: {{this.car.placa}}</li>
+      <li>Cor: {{this.car.cor}}</li>
+      <br />
+      {{/each}}
+    </ul>
+  </body>
+</html>
