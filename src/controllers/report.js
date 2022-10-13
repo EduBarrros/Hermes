@@ -12,13 +12,17 @@ exports.flowReport = async (req, res) => {
 
         const html = fs.readFileSync(path.resolve(__dirname, "../public/template.html"), 'utf-8')
 
+        const reportDate = new Date().toLocaleString('pt-BR', {
+            timeZone: 'America/Sao_Paulo'
+        })
+
         var options = {
             format: "A3",
             orientation: "portrait",
             border: "10mm",
             header: {
                 height: "45mm",
-                contents: '<div style="text-align: center;">Author: Eduardo Barros</div>'
+                contents: `<div style="text-align: center;">Author: Eduardo Barros - Emissão: ${reportDate}</div>`
             },
             footer: {
                 height: "28mm",
@@ -51,12 +55,22 @@ exports.flowReport = async (req, res) => {
             }
         }))
 
+        var balance = 0
+        var count = 0
+        parkings.map((doc) => {
+            balance += doc.valorFinal
+            count += 1
+        })
+        const moneyMask = `R$${balance},00`
+
         var document = {
             html: html,
             data: {
                 parkings: parkings,
+                balance: moneyMask,
+                count: count
             },
-            path: path.resolve(__dirname, "../reports/flowReport.pdf"),
+            path: path.resolve(__dirname, `../reports/relatorioDeFluxo.pdf`),
             type: "",
         };
 

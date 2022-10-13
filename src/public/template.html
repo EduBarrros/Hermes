@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Relatório de fluxo de veiculos</title>
-  </head>
-  <body>
-    <h1>Listagem de atendimentos completos:</h1>
-    <ul>
-      {{#each parkings}}
-      <li>Carro: {{this.car.modelo}}</li>
-      <li>Placa: {{this.car.placa}}</li>
-      <li>Cor: {{this.car.cor}}</li>
-      <br />
-      {{/each}}
-    </ul>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Relatório de fluxo de veiculos</title>
+</head>
+
+<body>
+  <h2>Listagem de atendimentos completos:</h2>
+  <ul>
+    {{#each parkings}}
+    <li>Responsável: {{this.emailFuncionario}}</li>
+    <li>Carro: {{this.car.modelo}}</li>
+    <li>Placa: {{this.car.placa}}</li>
+    <li>Cor: {{this.car.cor}}</li>
+    <li>Data e Hora de entrada: {{this.hrEntrada}}</li>
+    <li>Data e Hora de Saida: {{this.hrSaida}}</li>
+    <li>Valor final da estadia: {{this.valorFinal}}</li>
+    <br />
+    {{/each}}
+  </ul>
+  <h3>Quantidade de atendimento finalizados: {{this.count}}</h3>
+  <h3>Saldo arrecadado: {{this.balance}}</h3>
+</body>
+
 </html>
