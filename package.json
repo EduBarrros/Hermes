@@ -15,6 +15,7 @@
     "moment": "^2.29.4",
     "nodemon": "^2.0.20",
     "pdf-creator-node": "^2.3.5",
+    "pdf-to-base64": "^1.0.3",
     "uuid": "^9.0.0"
   }
 }

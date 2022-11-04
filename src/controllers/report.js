@@ -3,6 +3,7 @@ const pdf = require('pdf-creator-node');
 const moment = require('moment');
 const fs = require("fs");
 const path = require("path");
+const pdf2base64 = require('pdf-to-base64');
 
 const db = firebase.firestore()
 const parking = db.collection('cl_parking')
@@ -74,8 +75,23 @@ exports.flowReport = async (req, res) => {
             type: "",
         };
 
-        pdf.create(document, options)
-        res.status(201).send({ status: 1, msg: 'Relatório gerado com sucesso' })
+        await pdf.create(document, options)
+
+        var report64 = ''
+
+        await pdf2base64(path.resolve(__dirname, `../reports/relatorioDeFluxo.pdf`))
+            .then(
+                (response) => {
+                    report64 = response
+                }
+            )
+            .catch(
+                (error) => {
+                    console.log(error)
+                }
+            )
+
+        res.status(201).send({ status: 1, msg: 'Relatório gerado com sucesso', report: report64})
     } catch (error) {
         res.status(500).send({ status: 0, msg: 'Algo deu errado.', error: error })
     }
