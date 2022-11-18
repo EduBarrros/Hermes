@@ -4,7 +4,12 @@ exports.cadastrar = (req, res) => {
     const data = req.body;
 
     firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
-    .then((userCredential) => {
+    .then(async (userCredential) => {
+
+        await userCredential.user.updateProfile({
+            displayName: data.name
+        })
+
         res.status(201).send({status: 1, msg: 'Usuario cadastrado com sucesso!', user: userCredential.user.email})
     })
     .catch((error) => {
@@ -23,7 +28,7 @@ exports.entrar = (req, res) => {
 
     firebase.auth().signInWithEmailAndPassword(data.email, data.password)
     .then((userCredential) => {
-        res.status(200).send({status: 1, msg: 'Usuário logado com sucesso!', autenticado: true, user: userCredential.user.email})
+        res.status(200).send({status: 1, msg: 'Usuário logado com sucesso!', autenticado: true, user: userCredential.user.email, name: userCredential.user.displayName})
     })
     .catch((error) => {
         if(error.code === 'auth/wrong-password'){
