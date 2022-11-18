@@ -29,6 +29,43 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
 ### Select CheckIn: http://localhost:6060/parking/selectCheckIn/:id
 ### Select CheckOut: http://localhost:6060/parking/selectCheckOut/:id
 
+# Report
+
+## Post
+
+### http://localhost:6060/report/flowReport
+
+### Tipos de relatórios:
+
+  1 - Relatório geral de atendimento concluído.
+  2 - Relatrio de atendimento concluído por período.
+  3 - Relatório de entrada por período(Obs: Lista atendimento não finalizados ainda).
+
+### Exemplos de requisição:
+
+  1 - {
+        "type": 1
+      }
+ 
+  2 - {
+        "type": 2,
+        "start": "2022-10-09T00:00:00.000z",
+        "end": "2022-10-25T00:00:00.000z"
+      }
+     
+  3 - {
+        "type": 3,
+        "start": "2022-10-09T00:00:00.000z",
+        "end": "2022-10-25T00:00:00.000z"
+      }
+      
+ # Obs: Caso seja passado um body do tipo 2 ou 3 sem as informações necessárias o sistemas retornará:
+ 
+  {
+    "status": 0,
+    "msg": "Não foram passados os parametros necessários para gerar o relatório."
+  }
+
 =============================//==============================
 
 ## Como executar?
