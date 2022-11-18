@@ -35,13 +35,13 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
 
 ### http://localhost:6060/report/flowReport
 
-### Tipos de relatórios:
+#### Tipos de relatórios:
 
   1 - Relatório geral de atendimento concluído.
   2 - Relatrio de atendimento concluído por período.
   3 - Relatório de entrada por período(Obs: Lista atendimento não finalizados ainda).
 
-### Exemplos de requisição:
+#### Exemplos de requisição:
 
   1 - {
         "type": 1
@@ -59,7 +59,7 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
         "end": "2022-10-25T00:00:00.000z"
       }
       
- # Obs: Caso seja passado um body do tipo 2 ou 3 sem as informações necessárias o sistemas retornará:
+ ### Obs: Caso seja passado um body do tipo 2 ou 3 sem as informações necessárias o sistemas retornará:
  
   {
     "status": 0,
