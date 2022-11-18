@@ -12,7 +12,11 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
 
 ### Login: http://localhost:6060/auth/entrar
 
+Ex body : { "email": "eduardo@eduardo.com", "password" : "1234567" }
+
 ### Register: http://localhost:6060/auth/cadastrar
+
+Ex body : { "email": "eduardo@eduardo.com", "password" : "1234567", "name" : "Eduardo" }
 
 # Parking
 
@@ -65,6 +69,12 @@ Repositório para criação do backend do projeto de conclusão de curso FastPar
     "status": 0,
     "msg": "Não foram passados os parametros necessários para gerar o relatório."
   }
+ 
+ # Users
+ 
+ ## Get
+ 
+ ### http://localhost:6060/users/list
 
 =============================//==============================
 
