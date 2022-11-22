@@ -10,7 +10,8 @@ exports.listUsers = async (req, res) => {
             const userData = {
                 id: user.uid,
                 email: user.email,
-                name: !user.displayName ? 'Não cadastrado' : user.displayName
+                name: !user.displayName ? 'Não cadastrado' : user.displayName,
+                disabled: user.disabled
             }
 
             users = [...users, userData]
@@ -29,8 +30,6 @@ exports.updateUser = async (req, res) => {
         const id = req.body.id
         const email = req.body.email
         const name = req.body.name
-
-        console.log('Teste params', { id, email, name })
 
         if (!id || !email || !name) {
             res.status(403).send({ status: 0, msg: 'Não foram passados todos os dados para atualização' })
@@ -59,6 +58,41 @@ exports.updateUser = async (req, res) => {
                     break;
             }
 
+        })
+
+    } catch (error) {
+        res.status(500).send({ status: 0, msg: 'Algo deu errado.', error: error })
+    }
+}
+
+exports.disableUser = async (req, res) => {
+    try {
+        const id = req.body.id
+
+        if ( !id ) {
+            res.status(403).send({ status: 0, msg: 'Não foram passados todos os dados para atualização' })
+        }
+
+        admin.auth().updateUser(id, {
+
+            disabled: true
+
+        }).then(() => {
+
+            res.status(200).send({ status: 1, msg: "Usuário desativado." })
+
+        }).catch((error) => {
+
+            switch (error.code) {
+
+                case "auth/user-not-found":
+                    res.status(404).send({ status: 0, msg: 'Usuário não encontrado.' })
+                    break;
+
+                default:
+                    res.status(500).send({ status: 0, msg: 'Algo deu errado.', error: error })
+                    break;
+            }
         })
 
     } catch (error) {

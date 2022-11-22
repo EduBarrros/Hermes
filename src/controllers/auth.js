@@ -35,6 +35,8 @@ exports.entrar = (req, res) => {
             res.status(401).send({status: 0, msg: 'Usuario ou senha incorretos.', autendicado: false})
         }else if(error.code === 'auth/user-not-found'){
             res.status(401).send({status: 0, msg: 'Usuario ou senha incorretos.', autendicado: false})
+        }else if(error.code === 'auth/user-disabled'){
+            res.status(401).send({status: 0, msg: 'Usuários Bloqueado.', autendicado: false})
         }else{
             res.status(500).send({status: 0, msg: 'Algo deu errado.', autendicado: false, error: error})
         }
