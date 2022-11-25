@@ -30,15 +30,17 @@ exports.updateUser = async (req, res) => {
         const id = req.body.id
         const email = req.body.email
         const name = req.body.name
+        const disable = req.body.disable
 
-        if (!id || !email || !name) {
+        if ( !id || !email || !name ) {
             res.status(403).send({ status: 0, msg: 'Não foram passados todos os dados para atualização' })
         }
 
         admin.auth().updateUser(id, {
 
             email: email,
-            displayName: name
+            displayName: name,
+            disabled: disable
 
         }).then(() => {
             res.status(200).send({ status: 1, msg: "Usuário atualizado" })
