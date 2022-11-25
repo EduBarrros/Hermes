@@ -30,9 +30,9 @@ exports.updateUser = async (req, res) => {
         const id = req.body.id
         const email = req.body.email
         const name = req.body.name
-        const disable = req.body.disable
-
-        if ( !id || !email || !name ) {
+        const disabled = req.body.disabled
+        
+        if (!id || !email || !name) {
             res.status(403).send({ status: 0, msg: 'Não foram passados todos os dados para atualização' })
         }
 
@@ -40,7 +40,7 @@ exports.updateUser = async (req, res) => {
 
             email: email,
             displayName: name,
-            disabled: disable
+            disabled: disabled
 
         }).then(() => {
             res.status(200).send({ status: 1, msg: "Usuário atualizado" })
@@ -71,7 +71,7 @@ exports.disableUser = async (req, res) => {
     try {
         const id = req.body.id
 
-        if ( !id ) {
+        if (!id) {
             res.status(403).send({ status: 0, msg: 'Não foram passados todos os dados para atualização' })
         }
 
