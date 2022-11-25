@@ -75,6 +75,23 @@ Ex body : { "email": "eduardo@eduardo.com", "password" : "1234567", "name" : "Ed
  ## Get
  
  ### http://localhost:6060/users/list
+ 
+ ## Post
+ 
+ ### http://localhost:6060/users/update
+ 
+  Ex body: { "id": " ayauehuaehuaheuahe ", "email": "eduardo@eduardo.com", "name": "eduardo"}
+ 
+ ### http://localhost:6060/users/disable
+ 
+ Ex body: { "id": " ayauehuaehuaheuahe "}
+ 
+ ### Obs: Caso seja passado um body sem as informações necessárias o sistemas retornará:
+ 
+  {
+    "status": 0,
+    "msg": "Não foram passados os parametros necessários para gerar o relatório."
+  }
 
 =============================//==============================
 
