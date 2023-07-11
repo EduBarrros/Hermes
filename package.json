@@ -14,7 +14,7 @@
     "firebase": "^8.0.0",
     "firebase-admin": "^11.3.0",
     "moment": "^2.29.4",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.0.1",
     "pdf-creator-node": "^2.3.5",
     "pdf-to-base64": "^1.0.3",
     "uuid": "^9.0.0"
